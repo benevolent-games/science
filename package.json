@@ -1,0 +1,44 @@
+{
+	"name": "@benev/science",
+	"version": "0.0.0-dev.0",
+	"description": "new testing framework",
+	"license": "MIT",
+	"author": "Chase Moskal <chasemoskal@gmail.com>",
+	"type": "module",
+	"main": "x/index.js",
+	"files": [
+		"x",
+		"s"
+	],
+	"scripts": {
+		"build": "run-s clean compile",
+		"clean": "rm -rf x && mkdir x",
+		"compile": "tsc",
+		"start": "run-p watch",
+		"watch": "tsc -w",
+		"watchtest": "chokidar 'x/**/*.js' -c 'node x/internals/testing/suite.test.js'",
+		"test": "exit 0"
+	},
+	"devDependencies": {
+		"@types/node": "^18.11.19",
+		"chokidar-cli": "^3.0.0",
+		"npm-run-all": "^4.1.5",
+		"typescript": "^5.0.0-beta"
+	},
+	"keywords": [
+		"test",
+		"tests",
+		"testing",
+		"test-framework",
+		"test-harness",
+		"isomorphic"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/benevolent-games/science.git"
+	},
+	"bugs": {
+		"url": "https://github.com/benevolent-games/science/issues"
+	},
+	"homepage": "https://github.com/benevolent-games/science#readme"
+}
