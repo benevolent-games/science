@@ -1,6 +1,6 @@
 
 import {color} from "../tooling/colors.js"
-import {TestFailure} from "./errors/test-failure.js"
+import {Failure} from "../erroring/failure.js"
 
 export async function runTests<
 		T extends {[key: string]: () => Promise<void>}
@@ -37,7 +37,7 @@ export async function runTests<
 				color.magenta(error.message),
 			].join(" "))
 
-			if (!(error instanceof TestFailure) && error.stack) {
+			if (!(error instanceof Failure) && error.stack) {
 				console.error(
 					color.green(
 						error

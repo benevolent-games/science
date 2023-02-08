@@ -1,5 +1,5 @@
 
-import {FailedExpectation} from "./errors/failed-expectation.js"
+import {FailedExpectation} from "../erroring/failed-expectation.js"
 
 export const expect = (message: string) => ({
 	that: (subject: any) => ({
