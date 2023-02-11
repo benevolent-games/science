@@ -100,8 +100,9 @@ export function parseTestCases(suite: Suite): ParsedCases {
 		filterForIndicatedCases(ignoreIndicators, true)
 	)
 
-	const focused = allowed
-		.filter(filterForIndicatedCases(focusIndicators))
+	const focused = allowed.filter(
+		filterForIndicatedCases(focusIndicators)
+	)
 
 	const testcases = (focused.length > 0)
 		? focused
@@ -121,6 +122,7 @@ export function initializeSuiteReport({
 		focused,
 		testcases,
 	}: ParsedCases): SuiteInfo {
+
 	return {
 		total: raw.length,
 		allowed: allowed.length,

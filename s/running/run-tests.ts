@@ -1,5 +1,5 @@
 
-import {color} from "../tooling/colors.js"
+import {colors} from "../tooling/colors.js"
 import {Failure} from "../erroring/failure.js"
 
 export async function runTests<
@@ -15,7 +15,7 @@ export async function runTests<
 				if (err instanceof Error)
 					failures.push([label, err])
 				else {
-					console.error(color.red("UNKNOWN ERROR!!"))
+					console.error(colors.red("UNKNOWN ERROR!!"))
 					console.error(err)
 					process.exit(1)
 				}
@@ -31,15 +31,15 @@ export async function runTests<
 		for (const [testLabel, error] of failures) {
 
 			console.error([
-				color.magenta(error.name),
-				color.yellow(testLabel),
-				color.red("fails"),
-				color.magenta(error.message),
+				colors.magenta(error.name),
+				colors.yellow(testLabel),
+				colors.red("fails"),
+				colors.magenta(error.message),
 			].join(" "))
 
 			if (!(error instanceof Failure) && error.stack) {
 				console.error(
-					color.green(
+					colors.green(
 						error
 							.stack
 							.split("\n")
@@ -50,11 +50,11 @@ export async function runTests<
 			}
 		}
 
-		console.error(color.red(`${nfail} ${failure_s}.`))
+		console.error(colors.red(`${nfail} ${failure_s}.`))
 		process.exit(1)
 	}
 	else {
-		console.log(color.green(`${nfail} ${failure_s}.`))
+		console.log(colors.green(`${nfail} ${failure_s}.`))
 		process.exit(0)
 	}
 }

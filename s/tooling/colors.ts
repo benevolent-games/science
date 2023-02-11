@@ -1,4 +1,6 @@
 
+import {obtool} from "./obtool.js"
+
 export const codes = Object.freeze({
 	black: "\u001b[30m",
 	red: "\u001b[31m",
@@ -12,16 +14,28 @@ export const codes = Object.freeze({
 })
 
 export type Codes = typeof codes
+export type Colors = typeof colors
+export type ColorFunction = (s: string) => string
+export type AnyColors = {[key: string]: ColorFunction}
 
-export const color = <{[key in keyof Codes]: (s: string) => string}>(
-	Object.fromEntries(
-		Object.entries(codes)
-			.map(([key, code]) => [
-				key,
-				(s: string) => `${code}${s}${codes.reset}`,
-			])
-	)
+export const noop: ColorFunction = s => s
+
+function prepareColorFunctions(fun: (code: string) => ColorFunction) {
+	return obtool(codes).map(code => fun(code))
+}
+
+export const colors = prepareColorFunctions(
+	code => s =>
+		`${code}${s}${codes.reset}`
 )
+
+export const nocolors = prepareColorFunctions(
+	() => noop
+)
+
+export function theme<C extends AnyColors>(c: C): C {
+	return c
+}
 
 export function uncolor(s: string) {
 	return s.replace(
