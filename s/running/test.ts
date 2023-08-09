@@ -25,6 +25,7 @@ const ignoreIndicators = [
 	"XX",
 	"//",
 	"IGNORE",
+	"SKIP",
 ]
 
 const focusIndicators = [
